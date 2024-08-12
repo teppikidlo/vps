@@ -1,0 +1,22 @@
+name: Windows VPS Emulator
+
+on:
+  workflow_dispatch:
+
+jobs:
+  run-vps:
+    runs-on: windows-latest
+
+    steps:
+    - name: Set up environment
+      run: |
+        echo "Starting Windows VPS"
+        Install-WindowsFeature -Name Web-Server -IncludeAllSubFeature
+        Start-Service W3SVC
+        echo "Windows VPS is running"
+
+    - name: Run PowerShell Command
+      run: |
+        echo "Running a command..."
+        Get-Service W3SVC
+      shell: pwsh
